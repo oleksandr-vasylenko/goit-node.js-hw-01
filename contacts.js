@@ -52,7 +52,7 @@ const removeContact = async (contactId) => {
 
     contacts.splice(objWithIdIndex, 1);
 
-    if (!result) {
+    if (!objWithIdIndex) {
       return null;
     }
 
