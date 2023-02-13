@@ -15,7 +15,8 @@ const listContacts = async () => {
 const getContactById = async (contactId) => {
   try {
     const contacts = await listContacts();
-    const result = contacts.find((item) => (item.id = parseInt(contactId)));
+
+    const result = contacts.find((item) => parseInt(item.id) === contactId);
 
     if (!result) {
       return null;
@@ -27,13 +28,28 @@ const getContactById = async (contactId) => {
   }
 };
 
-function removeContact(contactId) {
-  // ...твій код
-}
-
 function addContact(name, email, phone) {
   // ...твій код
 }
+
+const removeContact = async (contactId) => {
+  try {
+    const contacts = await listContacts();
+
+    const objWithIdIndex = contacts.findIndex(
+      (item) => parseInt(item.id) === contactId
+    );
+
+    contacts.splice(objWithIdIndex, 1);
+
+    // if (!result) {
+    //   return null;
+    // }
+    return contacts;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   listContacts,
