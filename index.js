@@ -8,15 +8,14 @@ const {
 } = require("./contacts");
 
 // TODO: рефакторить
-function invokeAction({ action, id, name, email, phone }) {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
-      listContacts();
+      await listContacts().then(console.log);
       break;
 
     case "get":
-      //   console.log("id", id);
-      getContactById(id);
+      await getContactById(id).then(console.log);
       break;
 
     case "add":
@@ -24,12 +23,12 @@ function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case "remove":
-      console.log("id", id);
+      await removeContact(id).then(console.log);
       break;
 
     default:
-      console.warn("\x1B[31m Unknown action type!");
+      await addContact(id).then(console.log);
   }
-}
+};
 
 invokeAction(argv);
